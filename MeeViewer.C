@@ -1,6 +1,14 @@
 #include "include/SimpleViewer.h"
 //#include "include/Cube.h" // Cube Test
-#include "include/Wave.h" // Wave Test
+//#include "include/Wave.h" // Wave Test
+//#include "include/Ink1.h" // Wave Test
+//#include "include/Ink2.h" // Wave Test
+//#include "include/Marbling.h" // Wave Test
+//#include "include/Styrofoam.h" // Wave Test
+//#include "include/test1.h" // Wave Test
+//#include "include/test2.h" // Wave Test
+//#include "include/test3.h" // Wave Test
+#include "include/2D.h" // Wave Test
 
 
 /*
@@ -165,7 +173,8 @@ void MeeViewer(){
     //cout << "double y_mean[" << f_end-f_start << "];" << endl;
     //cout << "double d_mean[" << f_end-f_start << "];" << endl;
 
-    for(int ff=f_start;ff<f_end;++ff){
+    for(int ff=0;ff<f_end;++ff){
+
 
 	h_3d->Reset();
 	h_yz->Reset();
@@ -191,6 +200,7 @@ void MeeViewer(){
 	    fread(m_pRGBCameraBuf, sizeof(unsigned char), 640*480*3, m_pLoadFile);
 	}
 
+	if(ff>=f_start){
 	if(obj_x>0 || obj_y>0 || obj_z>0){
 	    for(int y=0;y<240;++y){
   	        for(int x=320;x>0;--x){
@@ -214,11 +224,13 @@ void MeeViewer(){
 		_x = 320.0-x;
 		_y = 240.0-y;
 		_d = m_pCameraBuf[1][y*320+x]/1.0;	
-		if((_d>_dm-_de && _d<_dm+_de) && (_x>_xm-_xe && _x<_xm+_xe) && (_y>_ym-_ye && _y<_ym+_ye)){
-		    h_3d->Fill(_x,_d,_y);
-		    h_yz->Fill(-1*_d,_y);
-		    h_xz->Fill(_x,_d);
-		    h_xy->Fill(_x,_y,_d);
+		if((_d>d_min && _d<d_max) && (_x>x_min && _x<x_max) && (_y>y_min && _y<y_max)){
+		    if((_d>_dm-_de && _d<_dm+_de) && (_x>_xm-_xe && _x<_xm+_xe) && (_y>_ym-_ye && _y<_ym+_ye)){
+		        h_3d->Fill(_x,_d,_y);
+		        h_yz->Fill(-1*_d,_y);
+		        h_xz->Fill(_x,_d);
+		        h_xy->Fill(_x,_y,_d);
+                    }
 		}
 	    }
 	}
@@ -297,6 +309,7 @@ void MeeViewer(){
 	//cout << "x_mean[" << ff-f_start << "] = " << _xm << ";" << endl;
 	//cout << "y_mean[" << ff-f_start << "] = " << _ym << ";" << endl;
 	//cout << "d_mean[" << ff-f_start << "] = " << _dm << ";" << endl;
+    }
     }
 
 }

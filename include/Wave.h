@@ -26,8 +26,23 @@ int obj_x = 0; // NoCut:0 / pixel
 int obj_y = 0; // NoCut:0 / pixel
 int obj_z = 0; // NoCut:0 / mm
 
+// Color Picture
+bool draw_picture = false;
+
+// Color Mask
+bool do_mask = false;
+bool mask_only = false; // Draw mask only // false : draw mask with red color
+int mask_r  = 20; // red
+int mask_g  = 20; // green
+int mask_b  = 20; // blue
+int mask_re = 20; // red +/- range
+int mask_ge = 20; // green +/- range
+int mask_be = 20; // blue +/- range
+int mask_blur = 10; // pixel
+
 // Draw Object Position Mean Line
 bool draw_mean_line = false;
 
 // Draw Object Position Graph
 bool draw_mean_graph = false;
+

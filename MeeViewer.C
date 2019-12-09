@@ -102,7 +102,8 @@ void MeeViewer(){
     TGraph* g_pz = new TGraph();
     TLatex* tex_v = new TLatex();
 
-    int c_div = 3;
+    int c_div = 2;
+    if(has_RGB && draw_picture){c_div = 3;}
     if(draw_mean_graph){c_div = 4;}
     c_Meere->Divide(c_div,2);
     c_Meere->cd(1);

@@ -327,8 +327,8 @@ cout << "d_max : " << d_max << ", depth_x : " << depth_x << ", x_end-160 : " << 
 	if(has_RGB && draw_picture){
 	    c_Meere->cd(c_div+3);
 	    gPad->Modified();
-	    stbi_write_bmp(Form("./%s/%s_%03d.png",output_path.c_str(),input_file.c_str(),ff),640,480,3,m_pRGBCameraBuf_re);
-	    img = TASImage::Open("test.bmp");
+	    stbi_write_bmp(Form("./%s/%s_%03d.bmp",output_path.c_str(),input_file.c_str(),ff),640,480,3,m_pRGBCameraBuf_re);
+	    img = TASImage::Open(Form("./%s/%s_%03d.bmp",output_path.c_str(),input_file.c_str(),ff));
 	    img->Draw("same");
 	    gPad->Modified();
 	}

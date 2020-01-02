@@ -48,6 +48,7 @@ FILE            *m_pLoadFile;
 
 unsigned short  *m_pCameraBuf[2];//[0]:Amplitude Data, [1]: Depth Data
 unsigned char   *m_pRGBCameraBuf;
+unsigned char   *m_pRGBCameraBuf_re;
 
 long            m_nFrameIndex;  //Frame Index [저장될 당시  Frame Index]
 ULONGLONG       m_nTimestamp;   //Time Stamp(unit: ms)

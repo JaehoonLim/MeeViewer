@@ -1,8 +1,9 @@
 #include "include/SimpleViewer.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "include/stb_image_write.h"
-#include "include/Cube.h" // Cube Test
+//#include "include/Cube.h" // Cube Test
 //#include "include/Wave.h" // Wave Test
+#include "include/Check.h" // Cube Test
 
 // Main Function Start
 void MeeViewer(){
@@ -71,17 +72,19 @@ void MeeViewer(){
 
     double depth_xy = 0.0;
 
-    double xm_start = floor(d_max*(x_start-160)/depth_x/100.0)*100.0;
-    double xm_end = ceil(d_max*(x_end-160)/depth_x/100.0)*100.0;
-    double ym_start = floor(d_max*(y_start-120)/depth_y/100.0)*100.0;
-    double ym_end = ceil(d_max*(y_end-120)/depth_y/100.0)*100.0;
+    double xm_start = floor(d_max*(x_start-160)/depth_x/sqrt(2)/100.0)*100.0;
+    double xm_end = ceil(d_max*(x_end-160)/depth_x/sqrt(2)/100.0)*100.0;
+cout << "d_max : " << d_max << ", depth_x : " << depth_x << ", x_end-160 : " << x_end-160 << ", xm_end : " <<d_max*(x_end-160)/depth_x << endl;
+    double ym_start = floor(d_max*(y_start-120)/depth_y/sqrt(2)/100.0)*100.0;
+    double ym_end = ceil(d_max*(y_end-120)/depth_y/sqrt(2)/100.0)*100.0;
 
     int xm_bin = int((xm_end-xm_start)/10);
     int ym_bin = int((ym_end-ym_start)/10);
 
     // Output Picture Size
-    int output_pic_width = 1500; // pixel
+    int output_pic_width = 1000; // pixel
     int output_pic_height = 750; // pixel
+    if(has_RGB && draw_picture){output_pic_width = 1500;}
     if(draw_mean_graph){output_pic_width = 2000;}
     bool check_save = false;
 
@@ -324,7 +327,7 @@ void MeeViewer(){
 	if(has_RGB && draw_picture){
 	    c_Meere->cd(c_div+3);
 	    gPad->Modified();
-	    stbi_write_bmp("test.bmp",640,480,3,m_pRGBCameraBuf_re);
+	    stbi_write_bmp(Form("./%s/%s_%03d.png",output_path.c_str(),input_file.c_str(),ff),640,480,3,m_pRGBCameraBuf_re);
 	    img = TASImage::Open("test.bmp");
 	    img->Draw("same");
 	    gPad->Modified();
